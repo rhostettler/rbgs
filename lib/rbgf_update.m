@@ -1,13 +1,13 @@
-function [m, P, K, yp, S, lpy] = rbgf_update(mp, Pp, y, g, B, R, in, il, Xi, wm, wc)
+function [m, P, K, yp, S, lpy] = rbgf_update(y, mp, Pp, g, B, R, in, il, Xi, wm, wc)
 % Rao-Blackwellized Gaussian filter measurement update for CGLSS
 %
 % Syntax:
-%   [m, P, K, yp, S, lpy] = RBGF_UPDATE(mp, Pp, y, g, B, R, in, il, Xi, wm, wc)
+%   [m, P, K, yp, S, lpy] = RBGF_UPDATE(y, mp, Pp, g, B, R, in, il, Xi, wm, wc)
 %
 % In:
+%   y   Current measurement (dy*1)
 %   mp  Predicted mean of the previous time step (dx*1)
 %   Pp  Predicted covariance of the previous time step (dx*dx)
-%   y   Current measurement (dy*1)
 %   g   Nonlinear observation function, function handle @(s)
 %   B   Linear observation matrix, matrix (dy*dz) or function handle @(s)
 %   R   Measurement noise covariance, matrix (dy*dy) or function handle

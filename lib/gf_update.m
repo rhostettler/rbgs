@@ -1,13 +1,13 @@
-function [m, P, K, yp, S, lpy] = gf_update(mp, Pp, y, g, R, Xi, wm, wc)
+function [m, P, K, yp, S, lpy] = gf_update(y, mp, Pp, g, R, Xi, wm, wc)
 % Sigma-point Gaussian filter measurement update for additive noise models
 %
 % Syntax:
-%   [m, P, K, yp, S, lpy] = GF_UPDATE(mp, Pp, y, g, R, Xi, wm, wc)
+%   [m, P, K, yp, S, lpy] = GF_UPDATE(y, mp, Pp, g, R, Xi, wm, wc)
 %
 % In:
+%   y   Current measurement (Ny*1)
 %   mp  Predicted mean of the previous time step (Nx*1)
 %   Pp  Predicted covariance of the previous time step (Nx*Nx)
-%   y   Current measurement (Ny*1)
 %   g   Nonlinear observation function, function handle @(x)
 %   R   Measurement noise covariance, matrix (Ny*Ny) or function handle
 %       @(x)

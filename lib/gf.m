@@ -1,13 +1,13 @@
-function [ms, Ps, mps, Pps, Cps, lpys] = gf(m0, P0, y, f, Q, g, R, Xi, wm, wc)
+function [ms, Ps, mps, Pps, Cps, lpys] = gf(y, m0, P0, f, Q, g, R, Xi, wm, wc)
 % Sigma-point Gaussian filter for nonlinear, additive noise models
 %
 % Syntax:
-%   [m, P, mp, Pp, Cp, lpy] = GF(m0, P0, y, f, Q, g, R, Xi, wm, wc)
+%   [m, P, mp, Pp, Cp, lpy] = GF(y, m0, P0, f, Q, g, R, Xi, wm, wc)
 %
 % In:
+%   y   Measurements (Ny*N)
 %   m0  Initial mean (Nx*1)
 %   P0  Initial covariance (Nx*Nx)
-%   y   Measurements (Ny*N)
 %   f   Dynamic function, function handle of the form @(x)
 %   Q   Process noise covariance, matrix (Nx*Nx) or function handle of the
 %       form @(x)
@@ -81,7 +81,7 @@ function [ms, Ps, mps, Pps, Cps, lpys] = gf(m0, P0, y, f, Q, g, R, Xi, wm, wc)
         Pps(:, :, n) = Pp;
         Cps(:, :, n) = Cp;
         
-        [m, P, ~, ~, ~, lpy] = gf_update(mp, Pp, y(:, n), g, R, Xi, wm, wc);
+        [m, P, ~, ~, ~, lpy] = gf_update(y(:, n), mp, Pp,g, R, Xi, wm, wc);
         ms(:, n) = m;
         Ps(:, :, n) = P;
         lpys(:, n) = lpy;

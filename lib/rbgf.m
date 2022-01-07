@@ -1,13 +1,13 @@
-function [ms, Ps, mps, Pps, Cps, lpys] = rbgf(m0, P0, y, f, A, Q, g, B, R, in, il, Xi, wm, wc)
+function [ms, Ps, mps, Pps, Cps, lpys] = rbgf(y, m0, P0, f, A, Q, g, B, R, in, il, Xi, wm, wc)
 % Rao-Blackwellized Gaussian filter for mixed linear/nonlinear SSMs
 %
 % Syntax:
-%   [m, P, mp, Pp, Cp, lpy] = RBGF(m0, P0, y, f, A, Q, g, B, R, in, il, Xi, wm, wc)
+%   [m, P, mp, Pp, Cp, lpy] = RBGF(y, m0, P0, f, A, Q, g, B, R, in, il, Xi, wm, wc)
 %
 % In:
+%   y   Measurements (dy*N)
 %   m0  Initial mean (dx*1)
 %   P0  Initial covariance (dx*dx)
-%   y   Measurements (dy*N)
 %   f   Nonlinear dynamic function, function handle of the form @(s)
 %   A   Linear state dynamics matrix, matrix (dx*dx) or function handle of
 %       the form @(s)
@@ -85,7 +85,7 @@ function [ms, Ps, mps, Pps, Cps, lpys] = rbgf(m0, P0, y, f, A, Q, g, B, R, in, i
         Pps(:, :, n) = Pp;
         Cps(:, :, n) = Cp;
         
-        [m, P, ~, ~, ~, lpy] = rbgf_update(mp, Pp, y(:, n), g, B, R, in, il, Xi, wm, wc);
+        [m, P, ~, ~, ~, lpy] = rbgf_update(y(:, n), mp, Pp, g, B, R, in, il, Xi, wm, wc);
         ms(:, n) = m;
         Ps(:, :, n) = P;
         lpys(:, n) = lpy;
